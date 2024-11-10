@@ -1,20 +1,21 @@
- dP""b8  dP"Yb           88 888888 888888 888888 88b 88 .dP"Y8 
-dP   `" dP   Yb ________ 88   88   88__   88__   88Yb88 `Ybo." 
-Yb  "88 Yb   dP """""""" 88   88   88""   88""   88 Y88 o.`Y8b 
- YboodP  YbodP           88   88   888888 888888 88  Y8 8bodP' 
-# GoITeens Homework 📚
+  __  __      ____ ______     __ 
+ / _ /  ) __  //  (_ (_  /| )(   
+(__)(__/     ((   /__/__/ |/__)  
+                                 
+# GoITeens Homework 
 
-Здесь собраны мои выполненные домашние задания с курсов GoITeens. Этот репозиторий — моя коллекция проектов и задач, которые я выполнял в процессе обучения. 
+Here are my completed homework assignments from GoITeens courses. This repository is my collection of projects and tasks that I completed during my studies.
 
-## Описание
 
-Каждое задание — это небольшой шаг на пути к моей цели стать профессионалом в сфере IT. В этом репозитории можно найти решения задач по программированию, проектам по дизайну и другим направлениям, которые я изучаю в GoITeens.
+## Description
 
-## Структура репозитория
+Each task is a small step towards my goal of becoming an IT professional. In this repository you can find solutions to programming problems, design projects and other areas that I study at GoITeens.
 
-- **Модули**: каждый модуль представляет собой определенный блок курсов, и задания в нем помогают отработать ключевые навыки.
-- **Коды, проекты и заметки**: я включил сюда свои коды, проекты и важные заметки, которые могут пригодиться в будущем.
 
-## Пример структуры папок
+## Repository structure
+
+- **Modules**: each module is a specific block of courses, and tasks in it help to develop key skills.
+- **Codes, Projects and Notes**: I have included my codes, projects and important notes here that may be useful in the future.
+
 
 
