@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Управление</title>
+</head>
+<body>
+  <h1>Управління</h1>
+
+  <button onclick="getMovies()">Получить фильмы</button>
+  <table id="moviesTable" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Жанр</th>
+        <th>Режисер</th>
+        <th>Год</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>Добавить новый фильм</h2>
+  <form id="addMovieForm" onsubmit="addMovie(event)">
+    <input type="text" id="title" placeholder="Название" required>
+    <input type="text" id="genre" placeholder="Жанр" required>
+    <input type="text" id="director" placeholder="Режисер" required>
+    <input type="number" id="year" placeholder="Год" required>
+    <button type="submit">Добавить фильм</button>
+  </form>
+
+  <script>
+    async function getMovies() {
+      const response = await fetch('http://localhost:3000/movies');
+      const movies = await response.json();
+      const tbody = document.querySelector('#moviesTable tbody');
+      tbody.innerHTML = '';
+      movies.forEach(movie => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${movie.id}</td>
+          <td>${movie.title}</td>
+          <td>${movie.genre}</td>
+          <td>${movie.director}</td>
+          <td>${movie.year}</td>
+          <td>
+            <button onclick="updateMovie(${movie.id})">Обновить</button>
+            <button onclick="editMovie(${movie.id})">Редактировать</button>
+            <button onclick="deleteMovie(${movie.id})">Удалить</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    async function addMovie(event) {
+      event.preventDefault();
+      const newMovie = {
+        title: document.getElementById('title').value,
+        genre: document.getElementById('genre').value,
+        director: document.getElementById('director').value,
+        year: parseInt(document.getElementById('year').value)
+      };
+      await fetch('http://localhost:3000/movies', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newMovie)
+      });
+      getMovies();
+      document.getElementById('addMovieForm').reset();
+    }
+
+    async function updateMovie(id) {
+      const updatedMovie = prompt('Новые данные в формате: Название, Жанр, Режиссер, Год').split(', ');
+      const movieData = {
+        title: updatedMovie[0],
+        genre: updatedMovie[1],
+        director: updatedMovie[2],
+        year: parseInt(updatedMovie[3])
+      };
+      await fetch(`http://localhost:3000/movies/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(movieData)
+      });
+      getMovies();
+    }
+
+    async function editMovie(id) {
+      const field = prompt('title, genre, director, year');
+      const value = prompt(`Новое значение для ${field}`);
+      await fetch(`http://localhost:3000/movies/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ [field]: field === 'year' ? parseInt(value) : value })
+      });
+      getMovies();
+    }
+
+    async function deleteMovie(id) {
+      await fetch(`http://localhost:3000/movies/${id}`, { method: 'DELETE' });
+      getMovies();
+    }
+  </script>
+</body>
+</html>
